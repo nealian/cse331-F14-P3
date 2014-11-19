@@ -1,6 +1,6 @@
 /*************************************************************************
 /
-/ filename: predictor.h
+/ filename: predictor21264.h
 /
 / description: 
 /
@@ -32,8 +32,22 @@
  concerned about the memory used by the simulated branch predictor.
  */
 
+#define LOCAL_HISTORY_TABLE_SIZE 1024
+#define LOCAL_HISTORY_TABLE_BITS 10
+#define LOCAL_PREDICTION_TABLE_SIZE 1024
+#define LOCAL_PREDICTION_TABLE_BITS 3
+#define GLOBAL_HISTORY_SIZE 12
+#define GLOBAL_PREDICTION_TABLE_SIZE 4096
+#define GLOBAL_PREDICTION_TABLE_BITS 2
+#define CHOICE_PREDICTION_TABLE_SIZE 4096
+#define CHOICE_PREDICTION_TABLE_BITS 2 // global? instead of taken?
 
-
+// THESE NEED TO BE DEFINED IN THE CPP FILE
+/* unsigned short localHistory[LOCAL_HISTORY_TABLE_SIZE]; */
+/* unsigned char localPrediction[LOCAL_PREDICTION_TABLE_SIZE]; */
+/* unsigned short globalHistory; */
+/* unsigned char globalPrediction[GLOBAL_PREDICTION_TABLE_SIZE]; */
+/* unsigned char choicePrediction[CHOICE_PREDICTION_TABLE_SIZE]; */
 
 /*
  Initialize the predictor.
