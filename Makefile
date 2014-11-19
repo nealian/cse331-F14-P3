@@ -1,14 +1,11 @@
-CC=g++
-OPTS=-g
 PREDICTOR ?= g
+CC=g++
 
 ifeq "$(PREDICTOR)" "g"
-  PREDICTORG=true
-  export PREDICTORG
+  OPTS=-g -DPREDICTORG
 else
-  PREDICTOR21264=true
-  export PREDICTOR21264
-endif
+  OPTS=-g -DPREDICTOR21264
+endif 
 
 all: predictor
 
@@ -25,4 +22,4 @@ predictor21264.o: predictor21264.h predictor21264.cpp
 	$(CC) $(OPTS) -c predictor21264.cpp
 
 clean:
-	rm -f *.o predictorg predictor21264;
+	rm -f *.o predictor;
