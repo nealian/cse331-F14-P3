@@ -1,8 +1,8 @@
 /*************************************************************************
 /
-/ filename: 
+/ filename: main.cpp
 /
-/ description: 
+/ description: Takes a trace file, call predictors. 
 /
 / authors: Neal, Ian
 / Gallegos, Cristobal
