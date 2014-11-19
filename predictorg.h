@@ -18,7 +18,6 @@
 
 #ifndef PREDICTORG_H
 #define PREDICTORG_H
-
 /*
  Define all your tables and their sizes here.
  All tables must be statically-sized.
@@ -32,9 +31,11 @@
  concerned about the memory used by the simulated branch predictor.
  */
 
-
-
-
+#define BRANCH_HISTORY_SIZE 16384
+#define GLOBAL_HISTORY_SIZE 14
+#define BRANCH_HISTORY_BITS 2
+//unsigned short globalHistory;
+//unsigned char branchHistory[BRANCH_HISTORY_SIZE];
 /*
  Initialize the predictor.
  */
@@ -53,5 +54,4 @@ bool make_prediction (unsigned int pc);
  indicates that the branch was not taken).
  */
 void train_predictor (unsigned int pc, bool outcome);
-
 #endif

@@ -1,8 +1,8 @@
 /*************************************************************************
 /
-/ filename: predictor.cpp
+/ filename: predictorg.cpp
 /
-/ description: 
+/ description: gshare predictor
 /
 / authors: Neal, Ian
 / Gallegos, Cristobal
@@ -17,11 +17,16 @@
  ************************************************************************/
 
 #include "predictorg.h"
-// A very stupid predictor.  It will always predict not taken.
+#include <string.h>
+#include <limits.h>
+
+unsigned short globalHistory;
+unsigned char branchHistory[BRANCH_HISTORY_SIZE];
 
 void init_predictor ()
 {
-    
+    globalHistory = 0;
+    memset(branchHistory, 0, BRANCH_HISTORY_SIZE * sizeof(char));
 }
 
 bool make_prediction (unsigned int pc)
@@ -31,4 +36,9 @@ bool make_prediction (unsigned int pc)
 
 void train_predictor (unsigned int pc, bool outcome)
 {
+    globalHistory <<= 1; //left shift and resign
+    globalHistory += outcome; // add outcome to end (outcome is implicitly typecast to int as 1 or 0)
+    globalHistory &= ~(USHRT_MAX - GLOBAL_HISTORY_SIZE); //truncate to needed size
+    
+    branchHistory[pc] = (globalHistory ^ pc) & ((1 << BRANCH_HISTORY_BITS) - 1); //Place XOR value in branch history table
 }

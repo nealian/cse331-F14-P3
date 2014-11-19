@@ -1,8 +1,8 @@
 /*************************************************************************
 /
-/ filename: predictor.cpp
+/ filename:
 /
-/ description: 
+/ description:
 /
 / authors: Neal, Ian
 / Gallegos, Cristobal
