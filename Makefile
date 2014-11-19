@@ -1,16 +1,13 @@
-PREDICTOR ?= g
 CC=g++
+OPTS=-g
 
-ifeq "$(PREDICTOR)" "g"
-  OPTS=-g -DPREDICTORG
-else
-  OPTS=-g -DPREDICTOR21264
-endif 
+all:
 
-all: predictor
+predictorg: traceread.h predictorg.o traceread.o
+	$(CC) $(OPTS) -lm -o predictor main.cpp traceread.o predictorg.o -DPREDICTORG
 
-predictor: traceread.h predictor$(PREDICTOR).o traceread.o
-	$(CC) $(OPTS) -lm -o predictor main.cpp traceread.o predictor$(PREDICTOR).o
+predictor21264: traceread.h predictor21264.o traceread.o
+	$(CC) $(OPTS) -lm -o predictor main.cpp traceread.o predictor21264.o -DPREDICTOR21264
 
 traceread.o: traceread.h traceread.cpp
 	$(CC) $(OPTS) -c traceread.cpp
