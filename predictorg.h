@@ -16,8 +16,8 @@
 /
  ************************************************************************/
 
-#ifndef PREDICTOR_H
-#define PREDICTOR_H
+#ifndef PREDICTORG_H
+#define PREDICTORG_H
 
 /*
  Define all your tables and their sizes here.

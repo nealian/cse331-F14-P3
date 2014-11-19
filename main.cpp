@@ -19,7 +19,13 @@
 #include <stdio.h>
 #include <netinet/in.h>
 #include "traceread.h"
-#include "predictor.h"
+
+#ifdef PREDICTORG
+  #include "predictorg.h"
+#endif
+#ifdef PREDICTOR21264
+  #include "predictor21264.h"
+#endif
 
 FILE * stream;
 
