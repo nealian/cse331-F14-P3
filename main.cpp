@@ -1,10 +1,20 @@
-//
-//  main.cpp
-//  BranchPrediction
-//
-//  Created by Cris Gallegos  on 11/18/14.
-//  Copyright (c) 2014 Cris Gallegos . All rights reserved.
-//
+/*************************************************************************
+/
+/ filename: 
+/
+/ description: 
+/
+/ authors: Neal, Ian
+/ Gallegos, Cristobal
+/
+/ class: CSE 331
+/ instructor: Zheng
+/ assignment: Lab Project #3
+/
+/ assigned: Nov 11, 2014
+/ due: Dec 2, 2014
+/
+ ************************************************************************/
 
 #include <stdio.h>
 #include <netinet/in.h>
