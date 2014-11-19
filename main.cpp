@@ -97,10 +97,10 @@ int main (int argc, char * argv[])
     }
     
     // Print out the mispredict statistics
-    printf ("Branches\t\t%10d\n", num_branches);
-    printf ("Incorrect\t\t%10d\n", mis_preds);
+    printf ("Branches\t\t%10ld\n", num_branches);
+    printf ("Incorrect\t\t%10ld\n", mis_preds);
     float mis_pred_rate = 100*(float)mis_preds / float(num_branches);
-    printf ("100*wrong_predicts/total branches is %8d / %8d = %7.3f\n", mis_preds, num_branches, mis_pred_rate);
+    printf ("100*wrong_predicts/total branches is %8ld / %8ld = %7.3f\n", mis_preds, num_branches, mis_pred_rate);
     
     if (argc == 2)
     {
