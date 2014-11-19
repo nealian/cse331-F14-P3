@@ -31,14 +31,25 @@ void init_predictor ()
 
 bool make_prediction (unsigned int pc)
 {
-    return false;
+    pc &= (1 << GLOBAL_HISTORY_SIZE) - 1; //truncates PC to within branchHistory table size
+    return branchHistory[pc] >= (1 << (BRANCH_HISTORY_BITS - 1)); //Make the prediction
 }
 
 void train_predictor (unsigned int pc, bool outcome)
 {
+    pc &= (1 << GLOBAL_HISTORY_SIZE) - 1;
     globalHistory <<= 1; //left shift and resign
     globalHistory += outcome; // add outcome to end (outcome is implicitly typecast to int as 1 or 0)
     globalHistory &= ~(USHRT_MAX - GLOBAL_HISTORY_SIZE); //truncate to needed size
     
-    branchHistory[pc] = (globalHistory ^ pc) & ((1 << BRANCH_HISTORY_BITS) - 1); //Place XOR value in branch history table
+    unsigned char *current_p = &(branchHistory[globalHistory ^ pc]); //pointing to needed value in array
+    
+    if(outcome)
+    {
+        *current_p += (*current_p < (1 << BRANCH_HISTORY_BITS) - 1) ? 1 : 0; //Calculating value then putting back where pointer points to
+    }
+    else
+    {
+        *current_p -= (*current_p > 0) ? 1 : 0;
+    }
 }
