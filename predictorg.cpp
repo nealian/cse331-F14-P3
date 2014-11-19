@@ -21,6 +21,7 @@
 
 void init_predictor ()
 {
+    
 }
 
 bool make_prediction (unsigned int pc)

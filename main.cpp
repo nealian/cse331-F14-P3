@@ -39,11 +39,9 @@ void setup_trace (const char * filename)
     
     else
     {
-        stream = fopen (filename, "r");
+        stream = fopen (filename, "r"); //r is for read mode
     }
 }
-
-
 
 void close_trace ()
 
