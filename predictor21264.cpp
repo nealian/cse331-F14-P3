@@ -70,7 +70,7 @@ void train_predictor (unsigned int pc, bool outcome)
     unsigned int pc_lh = pc & ((1 << LOCAL_HISTORY_TABLE_BITS) - 1);
     unsigned int pc_lp = pc & ((1 << LOCAL_HISTORY_TABLE_BITS) - 1);
     unsigned int pc_gp = pc & ((1 << GLOBAL_HISTORY_SIZE) - 1);
-    unsigned int pc_cp = pc & ((1 << CHOICE_HISTORY_SIZE) - 1);
+    unsigned int pc_cp = pc & ((1 << GLOBAL_HISTORY_SIZE) - 1);
 
     globalHistory <<= 1;
     globalHistory += outcome;
@@ -86,8 +86,8 @@ void train_predictor (unsigned int pc, bool outcome)
         choicePrediction[pc_cp] -= choicePrediction[pc_cp] > 0 ? 1 : 0;
     }
 
-    unsigned char *current_local = &(localPrediction[localHistory[pc_lh] ^ pc_lp]);
-    unsigned char *current_global = &(globalPrediction[globalHistory ^ pc_gp]);
+    unsigned short *current_local = &(localPrediction[localHistory[pc_lh] ^ pc_lp]);
+    unsigned short *current_global = &(globalPrediction[globalHistory ^ pc_gp]);
     if(outcome) {
         *current_local += *current_local < (1 << LOCAL_PREDICTION_TABLE_SIZE) - 1 ? 1 : 0;
         *current_global += *current_global < (1 << GLOBAL_PREDICTION_TABLE_SIZE) - 1 ? 1 : 0;

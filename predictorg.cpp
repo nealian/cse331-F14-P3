@@ -26,7 +26,7 @@ unsigned char branchHistory[BRANCH_HISTORY_SIZE];
 void init_predictor ()
 {
     globalHistory = 0;
-    memset(branchHistory, 0, BRANCH_HISTORY_SIZE * sizeof(char));
+    memset(branchHistory, 0, BRANCH_HISTORY_SIZE * sizeof(unsigned char));
 }
 
 bool make_prediction (unsigned int pc)
