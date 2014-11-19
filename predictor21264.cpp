@@ -81,7 +81,7 @@ void train_predictor (unsigned int pc, bool outcome)
     localHistory[pc_lh] &= ~(USHRT_MAX - GLOBAL_HISTORY_SIZE);
 
     if(choice_right(pc, outcome)) {
-        choicePrediction[pc_cp] += localPrediction[pc_cp] < (1 << CHOICE_PREDICTION_TABLE_SIZE) - 1 ? 1 : 0;
+        choicePrediction[pc_cp] += localPrediction[pc_cp] < (1 << LOCAL_HISTORY_TABLE_BITS) - 1 ? 1 : 0;
     } else {
         choicePrediction[pc_cp] -= choicePrediction[pc_cp] > 0 ? 1 : 0;
     }
@@ -89,8 +89,8 @@ void train_predictor (unsigned int pc, bool outcome)
     unsigned short *current_local = &(localPrediction[localHistory[pc_lh] ^ pc_lp]);
     unsigned short *current_global = &(globalPrediction[globalHistory ^ pc_gp]);
     if(outcome) {
-        *current_local += *current_local < (1 << LOCAL_PREDICTION_TABLE_SIZE) - 1 ? 1 : 0;
-        *current_global += *current_global < (1 << GLOBAL_PREDICTION_TABLE_SIZE) - 1 ? 1 : 0;
+        *current_local += *current_local < (1 << LOCAL_HISTORY_TABLE_BITS) - 1 ? 1 : 0;
+        *current_global += *current_global < (1 << GLOBAL_HISTORY_SIZE) - 1 ? 1 : 0;
     } else {
         *current_local -= *current_local > 0 ? 1 : 0;
         *current_global -= *current_global > 0 ? 1 : 0;
