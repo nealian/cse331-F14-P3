@@ -1,8 +1,8 @@
 /*************************************************************************
 /
-/ filename: 
+/ filename: traceread.cpp
 /
-/ description: 
+/ description: Reads the trace files
 /
 / authors: Neal, Ian
 / Gallegos, Cristobal

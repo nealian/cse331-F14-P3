@@ -1,8 +1,8 @@
 /*************************************************************************
 /
-/ filename: 
+/ filename: traceread.h
 /
-/ description: 
+/ description: Reads the trace files
 /
 / authors: Neal, Ian
 / Gallegos, Cristobal
