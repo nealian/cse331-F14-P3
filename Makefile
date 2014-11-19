@@ -1,7 +1,7 @@
 CC=g++
 OPTS=-g
 
-all:
+all: predictorg predictor21264
 
 predictorg: traceread.h predictorg.o traceread.o
 	$(CC) $(OPTS) -lm -o predictorg main.cpp traceread.o predictorg.o -DPREDICTORG
