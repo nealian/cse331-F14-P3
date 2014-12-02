@@ -40,16 +40,23 @@ bool choice_prediction (unsigned int pc) {
     return choicePrediction[pc] >= (1 << (CHOICE_PREDICTION_TABLE_BITS - 1));
 }
 
+// But was that last choice right?
 bool choice_right (unsigned int pc, bool outcome) {
     unsigned int pc_lp = pc & ((1 << LOCAL_HISTORY_TABLE_BITS) - 1);
     unsigned int pc_gp = pc & ((1 << GLOBAL_HISTORY_SIZE) - 1);
 
     if (choice_prediction(pc)) {
-        // global
-        return !(outcome ^ (globalPrediction[pc_gp] >= (1 << (GLOBAL_PREDICTION_TABLE_BITS - 1))));
+        // global prediction was chosen?
+        return outcome == // Should return True for outcome matching prediction
+            (globalPrediction[pc_gp] >=
+                (1 << (GLOBAL_PREDICTION_TABLE_BITS - 1))
+            );
     } else {
         // local
-        return !(outcome ^ (localPrediction[pc_lp] >= (1 << (LOCAL_PREDICTION_TABLE_BITS - 1))));
+        return outcome ==
+            (localPrediction[pc_lp] >=
+                (1 << (LOCAL_PREDICTION_TABLE_BITS - 1))
+            );
     }
 }
 
@@ -72,6 +79,12 @@ void train_predictor (unsigned int pc, bool outcome)
     unsigned int pc_gp = pc & ((1 << GLOBAL_HISTORY_SIZE) - 1);
     unsigned int pc_cp = pc & ((1 << GLOBAL_HISTORY_SIZE) - 1);
 
+    if(choice_right(pc, outcome)) {
+        choicePrediction[pc_cp] += localPrediction[pc_cp] < (1 << LOCAL_HISTORY_TABLE_BITS) - 1 ? 1 : 0; // Max out at LOCAL_HISTORY_TABLE_MAX (don't overflow)
+    } else {
+        choicePrediction[pc_cp] -= choicePrediction[pc_cp] > 0 ? 1 : 0; // Min out at 0 (don't overflow)
+    }
+
     globalHistory <<= 1;
     globalHistory += outcome;
     globalHistory &= ~(USHRT_MAX - GLOBAL_HISTORY_SIZE);
@@ -79,12 +92,6 @@ void train_predictor (unsigned int pc, bool outcome)
     localHistory[pc_lh] <<= 1;
     localHistory[pc_lh] += outcome;
     localHistory[pc_lh] &= ~(USHRT_MAX - GLOBAL_HISTORY_SIZE);
-
-    if(choice_right(pc, outcome)) {
-        choicePrediction[pc_cp] += localPrediction[pc_cp] < (1 << LOCAL_HISTORY_TABLE_BITS) - 1 ? 1 : 0;
-    } else {
-        choicePrediction[pc_cp] -= choicePrediction[pc_cp] > 0 ? 1 : 0;
-    }
 
     unsigned short *current_local = &(localPrediction[localHistory[pc_lh] ^ pc_lp]);
     unsigned short *current_global = &(globalPrediction[globalHistory ^ pc_gp]);
