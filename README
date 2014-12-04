@@ -1,0 +1,27 @@
+Neal, Ian
+Gallegos, Cristobal
+CSE 331
+Zheng
+Lab Project #3
+Nov 11, 2014
+Dec 4, 2014
+
+
+Build instructions: On a TCC machine, in Fedora, run `make` in this directory.
+Run instructions: Either run `./predictorg` and `./predictor21264` directly, as specified in the lab instructions, or run `./predictortest.sh` with a tracefile's path as an argument (Usage: ./predictortest.sh </path/to/tracefile.bz2> OR ./predictortest.sh </path/to/binary/tracefile>)
+
+
+Files in this directory:
+Makefile - make target definitions
+main.cpp - the executables' main shared source
+predictor21264 - tournament-style predictor executable
+predictor21264.cpp - tournament-style predictor source
+predictor21264.h - tournament-style predictor source definitions
+predictorg - gshare predictor executable
+predictorg.cpp - gshare predictor source
+predictorg.h - gshare predictor source definitions
+predictortest.sh - short shell script to run both predictors with the same tracefile argument
+README - this file
+traceread.cpp - source for reading the trace input
+traceread.h - definitions for reading the trace input
+traces/ - the given test traces

@@ -2,7 +2,7 @@
 /
 / filename: main.cpp
 /
-/ description: Takes a trace file, call predictors. 
+/ description: Takes a trace file, call predictors. Mostly untouched.
 /
 / authors: Neal, Ian
 / Gallegos, Cristobal
@@ -20,6 +20,7 @@
 #include <netinet/in.h>
 #include "traceread.h"
 
+// Use the correct header for the target; determined by the Makefile.
 #ifdef PREDICTORG
   #include "predictorg.h"
 #endif

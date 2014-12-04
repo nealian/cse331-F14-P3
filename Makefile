@@ -3,20 +3,12 @@ OPTS=-g
 
 all: predictorg predictor21264
 
-predictorg: traceread.h predictorg.o traceread.o main.cpp
-	$(CC) $(OPTS) -lm -o predictorg main.cpp traceread.o predictorg.o -DPREDICTORG
+# Use the same main file for each predictor.
+predictorg: traceread.h predictorg.cpp traceread.cpp main.cpp
+	$(CC) $(OPTS) -lm -o predictorg main.cpp traceread.cpp predictorg.cpp -DPREDICTORG
 
-predictor21264: traceread.h predictor21264.o traceread.o main.cpp
-	$(CC) $(OPTS) -lm -o predictor21264 main.cpp traceread.o predictor21264.o -DPREDICTOR21264
-
-traceread.o: traceread.h traceread.cpp
-	$(CC) $(OPTS) -c traceread.cpp
-
-predictorg.o: predictorg.h predictorg.cpp
-	$(CC) $(OPTS) -c predictorg.cpp
-
-predictor21264.o: predictor21264.h predictor21264.cpp
-	$(CC) $(OPTS) -c predictor21264.cpp
+predictor21264: traceread.h predictor21264.cpp traceread.cpp main.cpp
+	$(CC) $(OPTS) -lm -o predictor21264 main.cpp traceread.cpp predictor21264.cpp -DPREDICTOR21264
 
 clean:
-	rm -f *.o predictorg predictor21264;
+	rm -f predictorg predictor21264;

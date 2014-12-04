@@ -1,8 +1,9 @@
 /*************************************************************************
 /
-/ filename: predictor.h
+/ filename: predictorg.h
 /
-/ description: 
+/ description: The gshare predictor, with a global history and a branch
+/   history table.
 /
 / authors: Neal, Ian
 / Gallegos, Cristobal

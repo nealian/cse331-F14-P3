@@ -2,7 +2,8 @@
 /
 / filename: predictor21264.cpp
 /
-/ description:
+/ description: The tournament-style branch predictor with both local and
+/   global predictions, and a predictor to select between the two.
 /
 / authors: Neal, Ian
 / Gallegos, Cristobal

@@ -2,7 +2,8 @@
 /
 / filename: predictorg.cpp
 /
-/ description: gshare predictor
+/ description: The gshare predictor, with a global history and a branch
+/   history table.
 /
 / authors: Neal, Ian
 / Gallegos, Cristobal

@@ -2,7 +2,8 @@
 /
 / filename: predictor21264.h
 /
-/ description: 
+/ description: The tournament-style branch predictor with both local and
+/   global predictions, and a predictor to select between the two.
 /
 / authors: Neal, Ian
 / Gallegos, Cristobal
@@ -40,7 +41,7 @@
 #define GLOBAL_PREDICTION_TABLE_SIZE 4096
 #define GLOBAL_PREDICTION_TABLE_BITS 2
 #define CHOICE_PREDICTION_TABLE_SIZE 4096
-#define CHOICE_PREDICTION_TABLE_BITS 2 // global? instead of taken?
+#define CHOICE_PREDICTION_TABLE_BITS 2 // >half use global, <half use local
 
 // THESE NEED TO BE DEFINED IN THE CPP FILE
 /* unsigned short localHistory[LOCAL_HISTORY_TABLE_SIZE]; */
